@@ -5,7 +5,7 @@ class Dollar:
         self.amount = amount
 
     def times(self, multiplier):
-        return Dollar(10)
+        return Dollar(self.amount * multiplier)
 
 class TestMoney(unittest.TestCase):
     def testMultiplication(self):
