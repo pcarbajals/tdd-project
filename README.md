@@ -1,0 +1,2 @@
+# Code Project for "Learning Test-Driven Development"
+This is a [monorepo](https://trunkbaseddevelopment.com/monorepos/) containing all the source code for the ["Learning Test-Driven Development"](https://learning.oreilly.com/library/view/learning-test-driven-development/9781098106461/) book, published by O'Reilly. For reference, the [code repository](https://github.com/saleem/tdd-book-code) accompanying the book. 
