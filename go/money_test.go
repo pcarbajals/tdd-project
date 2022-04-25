@@ -6,35 +6,43 @@ import (
 
 func TestMultiplicationInUSD(t *testing.T) {
 	fiver := Money{amount: 5, currency: "USD"}
-	tenner := fiver.Times(2)
+	actualMoney := fiver.Times(2)
+	expectedMoney := Money{amount: 10, currency: "USD"}
 
-	if tenner.amount != 10 {
-		t.Errorf("Expected 10, got: [%d]", tenner.amount)
-	}
-
-	if tenner.currency != "USD" {
-		t.Errorf("Expected USD, got: [%s]", tenner.currency)
+	if actualMoney != expectedMoney {
+		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
 	}
 }
 
 func TestMultiplicationInEuros(t *testing.T) {
 	tenEuros := Money{amount: 10, currency: "EUR"}
-	twentyEuros := tenEuros.Times(2)
+	actualMoney := tenEuros.Times(2)
+	expectedMoney := Money{amount: 20, currency: "EUR"}
 
-	if twentyEuros.amount != 20 {
-		t.Errorf("Expected 20, got: [%d]", twentyEuros.amount)
+	if actualMoney != expectedMoney {
+		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
 	}
+}
 
-	if twentyEuros.currency != "EUR" {
-		t.Errorf("Expected EUR, got: [%s]", twentyEuros.currency)
+func TestDivision(t *testing.T) {
+	money := Money{amount: 4002, currency: "KRW"}
+	actualMoneyAfterDivision := money.Divide(4)
+	expectedMoneyAfterDivision := Money{amount: 1000.5, currency: "KRW"}
+
+	if actualMoneyAfterDivision != expectedMoneyAfterDivision {
+		t.Errorf("Expected %+v, got %+v", expectedMoneyAfterDivision, actualMoneyAfterDivision)
 	}
 }
 
 type Money struct {
-	amount   int
+	amount   float64
 	currency string
 }
 
 func (m Money) Times(multiplier int) Money {
-	return Money{amount: m.amount * multiplier, currency: m.currency}
+	return Money{amount: m.amount * float64(multiplier), currency: m.currency}
+}
+
+func (m Money) Divide(divisor int) Money {
+	return Money{amount: m.amount / float64(divisor), currency: m.currency}
 }
