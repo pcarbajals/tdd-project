@@ -5,32 +5,29 @@ import (
 )
 
 func TestMultiplicationInUSD(t *testing.T) {
-	fiver := Money{amount: 5, currency: "USD"}
-	actualMoney := fiver.Times(2)
-	expectedMoney := Money{amount: 10, currency: "USD"}
+	actualMoney := Money{5, "USD"}.Times(2)
+	expectedMoney := Money{10, "USD"}
 
-	if actualMoney != expectedMoney {
-		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
-	}
+	assertEqual(actualMoney, expectedMoney, t)
 }
 
 func TestMultiplicationInEuros(t *testing.T) {
-	tenEuros := Money{amount: 10, currency: "EUR"}
-	actualMoney := tenEuros.Times(2)
-	expectedMoney := Money{amount: 20, currency: "EUR"}
+	actualMoney := Money{10, "EUR"}.Times(2)
+	expectedMoney := Money{20, "EUR"}
 
-	if actualMoney != expectedMoney {
-		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
-	}
+	assertEqual(actualMoney, expectedMoney, t)
 }
 
 func TestDivision(t *testing.T) {
-	money := Money{amount: 4002, currency: "KRW"}
-	actualMoneyAfterDivision := money.Divide(4)
-	expectedMoneyAfterDivision := Money{amount: 1000.5, currency: "KRW"}
+	actualMoney := Money{4002, "KRW"}.Divide(4)
+	expectedMoney := Money{1000.5, "KRW"}
 
-	if actualMoneyAfterDivision != expectedMoneyAfterDivision {
-		t.Errorf("Expected %+v, got %+v", expectedMoneyAfterDivision, actualMoneyAfterDivision)
+	assertEqual(actualMoney, expectedMoney, t)
+}
+
+func assertEqual(actualMoney Money, expectedMoney Money, t *testing.T) {
+	if actualMoney != expectedMoney {
+		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
 	}
 }
 
