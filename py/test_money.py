@@ -1,12 +1,6 @@
 from audioop import mul
 import unittest
 
-class Dollar:
-    def __init__(self, amount) -> None:
-        self.amount = amount
-
-    def times(self, multiplier):
-        return Dollar(self.amount * multiplier)
 
 class Money:
     def __init__(self, amount, currency) -> None:
@@ -16,13 +10,15 @@ class Money:
     def times(self, multiplier):
         return Money(self.amount * multiplier, self.currency)
 
-class TestMoney(unittest.TestCase):
-    def testMultiplication(self):
-        fiver = Dollar(5)
-        tenner = fiver.times(2)
-        self.assertEqual(10, tenner.amount)
 
-    def testMultiplicationInEuros(self):
+class TestMoney(unittest.TestCase):
+    def test_multiplication_in_usd(self):
+        fiver = Money(5, "USD")
+        tenner = fiver.times(2)
+        self.assertEqual(tenner.amount, 10)
+        self.assertEqual(tenner.currency, "USD")
+
+    def test_multiplication_in_euros(self):
         tenEuros = Money(10, "EUR")
         twentyEuros = tenEuros.times(2)
         self.assertEqual(twentyEuros.amount, 20)

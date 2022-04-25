@@ -1,14 +1,5 @@
 const assert = require('assert');
 
-class Dollar {
-    constructor(amount) {
-        this.amount = amount;
-    }
-
-    times(multiplier) {
-        return new Dollar(this.amount * multiplier);
-    }
-}
 
 class Money {
     constructor(amount, currency) {
@@ -20,9 +11,10 @@ class Money {
         return new Money(this.amount * multiplier, this.currency);
     }
 } 
-let fiver = new Dollar(5);
+let fiver = new Money(5, "USD");
 let tenner = fiver.times(2);
 assert.strictEqual(tenner.amount, 10);
+assert.strictEqual(tenner.currency, "USD");
 
 let tenEuros = new Money(10, "EUR");
 let twentyEuros = tenEuros.times(2);
