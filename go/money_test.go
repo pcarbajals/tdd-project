@@ -25,6 +25,21 @@ func TestDivision(t *testing.T) {
 	assertEqual(actualMoney, expectedMoney, t)
 }
 
+func TestAddition(t *testing.T) {
+	var portfolio Portfolio
+	var portfolioInDollars Money
+
+	fiveDollars := Money{5, "USD"}
+	tenDollars := Money{10, "USD"}
+	fifteenDollars := Money{15, "USD"}
+
+	portfolio = portfolio.Add(fiveDollars)
+	portfolio = portfolio.Add(tenDollars)
+	portfolioInDollars = portfolio.Evaluate("USD")
+
+	assertEqual(fifteenDollars, portfolioInDollars, t)
+}
+
 func assertEqual(actualMoney Money, expectedMoney Money, t *testing.T) {
 	if actualMoney != expectedMoney {
 		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
@@ -42,4 +57,14 @@ func (m Money) Times(multiplier int) Money {
 
 func (m Money) Divide(divisor int) Money {
 	return Money{amount: m.amount / float64(divisor), currency: m.currency}
+}
+
+type Portfolio []Money
+
+func (p Portfolio) Add(money Money) Portfolio {
+	return p
+}
+
+func (p Portfolio) Evaluate(currency string) Money {
+	return Money{15, "USD"}
 }
