@@ -17,12 +17,19 @@ class Money {
 } 
 
 class Portfolio {
-    constructor() { }
+    constructor() {
+        this.monies = new Array();
+    }
 
-    add(money) { }
+    add(...monies) {
+        this.monies = this.monies.concat(monies);
+    }
 
     evaluate(currency) {
-        return new Money(15, "USD");
+        let total = this.monies.reduce((sum, money) => {
+            return sum + money.amount
+        }, 0);
+        return new Money(total, currency);
     }
 }
 

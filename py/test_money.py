@@ -1,4 +1,5 @@
-from audioop import mul
+from operator import add
+from functools import reduce
 import unittest
 
 
@@ -19,13 +20,14 @@ class Money:
 
 class Portfolio:
     def __init__(self) -> None:
-        pass
+        self.monies = []
 
     def add(self, *monies) -> None:
-        pass
+        self.monies.extend(monies)
 
     def evaluate(self, currency) -> Money:
-        return Money(15, "USD")
+        total = reduce(add, [m.amount for m in self.monies], 0)
+        return Money(total, currency) 
 
 
 class TestMoney(unittest.TestCase):
