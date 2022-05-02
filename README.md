@@ -5,14 +5,14 @@ This is a [monorepo](https://trunkbaseddevelopment.com/monorepos/) containing al
 This repo is based on the [code repository](https://github.com/saleem/tdd-book-code) accompanying the book, to avoid repetition, check out its [README](https://github.com/saleem/tdd-book-code/blob/main/README.md) for configuration and run information.
 
 ## Progress
-- Chapter 0  :white_check_mark:
+- Chapter 0 :white_check_mark:
 - Chapter 1 :white_check_mark:
 - Chapter 2 :white_check_mark:
 - Chapter 3 :white_check_mark:
 - Chapter 4 :white_check_mark:
 - Chapter 5 :white_check_mark:
-- Chapter 6 :star:
-- Chapter 7 
+- Chapter 6 :white_check_mark:
+- Chapter 7 :star:
 - Chapter 8 
 - Chapter 9 
 - Chapter 10 
