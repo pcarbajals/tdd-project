@@ -33,11 +33,34 @@ class MoneyTest {
     }
 
     runAllTest() {
+        let counter = 0;
         let testMethods = this.getAllTestMethods();
         testMethods.forEach(m => {
             let method = Reflect.get(this, m);
-            Reflect.apply(method, this, []);
+            try {
+                Reflect.apply(method, this, []);
+                console.log("%s ... OK", m);
+                
+            } catch (error) {
+                counter += 1;
+                console.log("======================================================================");
+                console.log("FAIL: %s", m);
+                console.log("----------------------------------------------------------------------");
+                if (error instanceof assert.AssertionError) {
+                    console.log(error);
+                } else {
+                    throw error;
+                }
+                console.log("----------------------------------------------------------------------");
+            }
         });
+
+        console.log("\nRan %d tests", testMethods.length);
+        if (counter > 0) {
+            console.log("FAILED (failures=%d)", counter);
+        } else {
+            console.log("OK");
+        }
     }
 }
 

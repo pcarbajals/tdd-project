@@ -15,7 +15,6 @@ echo
 echo "Running Javascript tests"
 echo 
 node js/test_money.js
-echo "OK (if no messages above)"
 echo
 echo ..........................................................................
 echo
