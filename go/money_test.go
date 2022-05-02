@@ -5,14 +5,7 @@ import (
 	"testing"
 )
 
-func TestMultiplicationInUSD(t *testing.T) {
-	actualMoney := stocks.NewMoney(5, "USD").Times(2)
-	expectedMoney := stocks.NewMoney(10, "USD")
-
-	assertEqual(actualMoney, expectedMoney, t)
-}
-
-func TestMultiplicationInEuros(t *testing.T) {
+func TestMultiplication(t *testing.T) {
 	actualMoney := stocks.NewMoney(10, "EUR").Times(2)
 	expectedMoney := stocks.NewMoney(20, "EUR")
 
