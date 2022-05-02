@@ -1,12 +1,22 @@
-# Solution for the Book "Learning Test-Driven Development"
+# Solution to the Book "Learning Test-Driven Development" by Saleem Siddiqui
 This is a [monorepo](https://trunkbaseddevelopment.com/monorepos/) containing all the source code for the ["Learning Test-Driven Development"](https://learning.oreilly.com/library/view/learning-test-driven-development/9781098106461/) book, published by O'Reilly.
 
 ## Prerequisites
 This repo is based on the [code repository](https://github.com/saleem/tdd-book-code) accompanying the book, to avoid repetition, check out its [README](https://github.com/saleem/tdd-book-code/blob/main/README.md) for configuration and run information.
 
-## List of Features to Implement
-- 5 USD x 2 = 10 USD
-- 10 EUR x 2 = 20 EUR
-- 4002 KRW / 4 = 1000.5 KRW
-- 5 USD + 10 EUR = 17 USD
-- 1 USD + 1100 KRW = 2200 KRW
+## Progress
+- Chapter 0 :white_check_mark:
+- Chapter 1 :white_check_mark:
+- Chapter 2 :white_check_mark:
+- Chapter 3 :white_check_mark:
+- Chapter 4 :white_check_mark:
+- Chapter 5 :white_check_mark:
+- Chapter 6 :sparkle:
+- Chapter 7 
+- Chapter 8 
+- Chapter 9 
+- Chapter 10 
+- Chapter 11 
+- Chapter 12 
+- Chapter 13 
+- Chapter 14 
