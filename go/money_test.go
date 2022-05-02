@@ -1,37 +1,38 @@
 package main
 
 import (
+	stocks "tdd/stocks"
 	"testing"
 )
 
 func TestMultiplicationInUSD(t *testing.T) {
-	actualMoney := Money{5, "USD"}.Times(2)
-	expectedMoney := Money{10, "USD"}
+	actualMoney := stocks.NewMoney(5, "USD").Times(2)
+	expectedMoney := stocks.NewMoney(10, "USD")
 
 	assertEqual(actualMoney, expectedMoney, t)
 }
 
 func TestMultiplicationInEuros(t *testing.T) {
-	actualMoney := Money{10, "EUR"}.Times(2)
-	expectedMoney := Money{20, "EUR"}
+	actualMoney := stocks.NewMoney(10, "EUR").Times(2)
+	expectedMoney := stocks.NewMoney(20, "EUR")
 
 	assertEqual(actualMoney, expectedMoney, t)
 }
 
 func TestDivision(t *testing.T) {
-	actualMoney := Money{4002, "KRW"}.Divide(4)
-	expectedMoney := Money{1000.5, "KRW"}
+	actualMoney := stocks.NewMoney(4002, "KRW").Divide(4)
+	expectedMoney := stocks.NewMoney(1000.5, "KRW")
 
 	assertEqual(actualMoney, expectedMoney, t)
 }
 
 func TestAddition(t *testing.T) {
-	var portfolio Portfolio
-	var portfolioInDollars Money
+	var portfolio stocks.Portfolio
+	var portfolioInDollars stocks.Money
 
-	fiveDollars := Money{5, "USD"}
-	tenDollars := Money{10, "USD"}
-	fifteenDollars := Money{15, "USD"}
+	fiveDollars := stocks.NewMoney(5, "USD")
+	tenDollars := stocks.NewMoney(10, "USD")
+	fifteenDollars := stocks.NewMoney(15, "USD")
 
 	portfolio = portfolio.Add(fiveDollars)
 	portfolio = portfolio.Add(tenDollars)
@@ -40,7 +41,7 @@ func TestAddition(t *testing.T) {
 	assertEqual(fifteenDollars, portfolioInDollars, t)
 }
 
-func assertEqual(actualMoney Money, expectedMoney Money, t *testing.T) {
+func assertEqual(actualMoney stocks.Money, expectedMoney stocks.Money, t *testing.T) {
 	if actualMoney != expectedMoney {
 		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
 	}
