@@ -1,33 +1,7 @@
-from operator import add
-from functools import reduce
 import unittest
 
-
-class Money:
-    def __init__(self, amount, currency) -> None:
-        self.amount = amount
-        self.currency = currency
-
-    def times(self, multiplier):
-        return Money(self.amount * multiplier, self.currency)
-
-    def divide(self, divisor):
-        return Money(self.amount / divisor, self.currency)
-
-    def __eq__(self, other: object) -> bool:
-        return self.amount == other.amount and self.currency == other.currency
-
-
-class Portfolio:
-    def __init__(self) -> None:
-        self.monies = []
-
-    def add(self, *monies) -> None:
-        self.monies.extend(monies)
-
-    def evaluate(self, currency) -> Money:
-        total = reduce(add, [m.amount for m in self.monies], 0)
-        return Money(total, currency) 
+from money import Money
+from portfolio import Portfolio
 
 
 class TestMoney(unittest.TestCase):
