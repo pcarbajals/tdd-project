@@ -5,13 +5,7 @@ from portfolio import Portfolio
 
 
 class TestMoney(unittest.TestCase):
-    def test_multiplication_in_usd(self):
-        actual_money = Money(5, "USD").times(2)
-        expected_money = Money(10, "USD")
-
-        self.assertEqual(actual_money, expected_money)
-
-    def test_multiplication_in_euros(self):
+    def test_multiplication(self):
         actual_money = Money(10, "EUR").times(2)
         expected_money = Money(20, "EUR")
 
