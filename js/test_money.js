@@ -23,6 +23,14 @@ class MoneyTest {
         assert.deepStrictEqual(portfolio.evaluate("USD"), new Money(15, "USD"))
     }
 
+    testAdditionOfDollarsAndEuros() {
+        let fiveDollars = new Money(5, "USD");
+        let tenEuros = new Money(10, "EUR");
+        let portfolio = new Portfolio();
+        portfolio.add(fiveDollars, tenEuros)
+        assert.deepStrictEqual(portfolio.evaluate("USD"), new Money(17, "USD"))
+    }
+
     getAllTestMethods() {
         let moneyPrototype = MoneyTest.prototype;
         let allProps = Object.getOwnPropertyNames(moneyPrototype);
