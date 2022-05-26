@@ -13,7 +13,7 @@ class Portfolio:
         self.monies.extend(monies)
 
     def evaluate(self, currency: float) -> Money:
-        total = reduce(add, [self.convert(money, currency) for money in self.monies], 0)
+        total = sum(self.convert(money, currency) for money in self.monies)
         return Money(total, currency) 
 
     def convert(self, money: Money, currency: str) -> float:
