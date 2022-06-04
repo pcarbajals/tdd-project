@@ -31,6 +31,14 @@ class MoneyTest {
         assert.deepStrictEqual(portfolio.evaluate("USD"), new Money(17, "USD"))
     }
 
+    testAdditionOfDollarsAndWons() {
+        let oneDollar = new Money(1, "USD");
+        let elevenHundredWons = new Money(1100, "KRW");
+        let portfolio = new Portfolio();
+        portfolio.add(oneDollar, elevenHundredWons)
+        assert.deepStrictEqual(portfolio.evaluate("KRW"), new Money(2200, "KRW"))
+    }
+
     getAllTestMethods() {
         let moneyPrototype = MoneyTest.prototype;
         let allProps = Object.getOwnPropertyNames(moneyPrototype);
