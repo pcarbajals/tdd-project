@@ -11,6 +11,6 @@ class Money {
     divide(divisor) {
         return new Money(this.amount / divisor, this.currency)
     }
-} 
+}
 
 module.exports = Money

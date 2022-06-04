@@ -3,7 +3,7 @@
 echo ..........................................................................
 echo
 echo "Running Go tests"
-echo 
+echo
 export GO111MODULE="on"
 export GOPATH=""
 cd ./go
@@ -13,13 +13,12 @@ echo
 echo ..........................................................................
 echo
 echo "Running Javascript tests"
-echo 
+echo
 node js/test_money.js
 echo
 echo ..........................................................................
 echo
 echo "Running Python tests"
-echo 
+echo
 python3 py/test_money.py -v
 echo ..........................................................................
-

@@ -53,5 +53,5 @@ class TestPortfolio(unittest.TestCase):
         self.assertEqual(actual_money, expected_money)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

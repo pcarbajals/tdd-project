@@ -15,10 +15,10 @@ This repo is based on the [code repository](https://github.com/saleem/tdd-book-c
 - Chapter 7 :white_check_mark:
 - Chapter 8 :white_check_mark:
 - Chapter 9 :star:
-- Chapter 10 
-- Chapter 11 
-- Chapter 12 
-- Chapter 13 
-- Chapter 14 
+- Chapter 10
+- Chapter 11
+- Chapter 12
+- Chapter 13
+- Chapter 14
 
 <!-- emogis cheat sheet: https://github.com/ikatyang/emoji-cheat-sheet -->

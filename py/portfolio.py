@@ -1,6 +1,3 @@
-from functools import reduce
-from lib2to3.pytree import convert
-from operator import add
 from typing import Dict
 
 from money import Money
@@ -9,7 +6,7 @@ from money import Money
 class Portfolio:
     def __init__(self) -> None:
         self.monies = []
-        self.exchange_rates: Dict[str,float] = {
+        self.exchange_rates: Dict[str, float] = {
             "EUR->USD": 1.2,
             "USD->KRW": 1100,
         }
@@ -19,7 +16,7 @@ class Portfolio:
 
     def evaluate(self, currency: float) -> Money:
         total = sum(self.convert(money, currency) for money in self.monies)
-        return Money(total, currency) 
+        return Money(total, currency)
 
     def convert(self, money: Money, currency: str) -> float:
         rate = f"{money.currency}->{currency}"

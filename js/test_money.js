@@ -56,7 +56,7 @@ class MoneyTest {
             try {
                 Reflect.apply(method, this, []);
                 console.log("%s ... OK", m);
-                
+
             } catch (error) {
                 counter += 1;
                 console.log("======================================================================");
@@ -81,4 +81,3 @@ class MoneyTest {
 }
 
 new MoneyTest().runAllTest();
-
