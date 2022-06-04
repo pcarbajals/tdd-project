@@ -1,6 +1,7 @@
 from functools import reduce
 from lib2to3.pytree import convert
 from operator import add
+from typing import Dict
 
 from money import Money
 
@@ -8,7 +9,10 @@ from money import Money
 class Portfolio:
     def __init__(self) -> None:
         self.monies = []
-        self.eur_to_usd_rate: float = 1.2
+        self.exchange_rates: Dict[str,float] = {
+            "EUR->USD": 1.2,
+            "USD->KRW": 1100,
+        }
 
     def add(self, *monies) -> None:
         self.monies.extend(monies)
@@ -18,4 +22,9 @@ class Portfolio:
         return Money(total, currency) 
 
     def convert(self, money: Money, currency: str) -> float:
-        return money.amount if money.currency == currency else money.amount * self.eur_to_usd_rate
+        rate = f"{money.currency}->{currency}"
+
+        if money.currency == currency:
+            return money.amount
+
+        return money.amount * self.exchange_rates[rate]
