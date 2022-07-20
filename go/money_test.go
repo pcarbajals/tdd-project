@@ -29,7 +29,7 @@ func TestAddition(t *testing.T) {
 
 	portfolio = portfolio.Add(fiveDollars)
 	portfolio = portfolio.Add(tenDollars)
-	portfolioInDollars = portfolio.Evaluate("USD")
+	portfolioInDollars, _ = portfolio.Evaluate("USD")
 
 	assertEqual(fifteenDollars, portfolioInDollars, t)
 }
@@ -42,7 +42,7 @@ func TestAdditionOfDollarsAndEuros(t *testing.T) {
 
 	portfolio = portfolio.Add(fiveDollars)
 	portfolio = portfolio.Add(tenEuros)
-	actualMoney := portfolio.Evaluate("USD")
+	actualMoney, _ := portfolio.Evaluate("USD")
 
 	expectMoney := stocks.NewMoney(17, "USD")
 
@@ -57,11 +57,32 @@ func TestAdditionOfDollarsAndWons(t *testing.T) {
 
 	portfolio = portfolio.Add(oneDollar)
 	portfolio = portfolio.Add(elevenHundredWon)
-	actualMoney := portfolio.Evaluate("KRW")
+	actualMoney, _ := portfolio.Evaluate("KRW")
 
 	expectedMoney := stocks.NewMoney(2200, "KRW")
 
 	assertEqual(actualMoney, expectedMoney, t)
+}
+
+func TestAddtionWithMultipleMissingExchangeRates(t *testing.T) {
+	var portfolio stocks.Portfolio
+
+	oneDollar := stocks.NewMoney(1, "USD")
+	oneEuro := stocks.NewMoney(1, "EUR")
+	oneWon := stocks.NewMoney(1, "KRW")
+
+	portfolio = portfolio.Add(oneDollar)
+	portfolio = portfolio.Add(oneEuro)
+	portfolio = portfolio.Add(oneWon)
+
+	expectedErrorMessage :=
+		"Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid,]"
+	_, actualError := portfolio.Evaluate("Kalganid")
+
+	if expectedErrorMessage != actualError.Error() {
+		t.Errorf("Expected %s Got %s",
+			expectedErrorMessage, actualError.Error())
+	}
 }
 
 func assertEqual(actualMoney stocks.Money, expectedMoney stocks.Money, t *testing.T) {
