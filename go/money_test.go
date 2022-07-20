@@ -9,14 +9,14 @@ func TestMultiplication(t *testing.T) {
 	actualMoney := stocks.NewMoney(10, "EUR").Times(2)
 	expectedMoney := stocks.NewMoney(20, "EUR")
 
-	assertEqual(actualMoney, expectedMoney, t)
+	assertEqual(t, expectedMoney, actualMoney)
 }
 
 func TestDivision(t *testing.T) {
 	actualMoney := stocks.NewMoney(4002, "KRW").Divide(4)
 	expectedMoney := stocks.NewMoney(1000.5, "KRW")
 
-	assertEqual(actualMoney, expectedMoney, t)
+	assertEqual(t, expectedMoney, actualMoney)
 }
 
 func TestAddition(t *testing.T) {
@@ -31,7 +31,7 @@ func TestAddition(t *testing.T) {
 	portfolio = portfolio.Add(tenDollars)
 	portfolioInDollars, _ = portfolio.Evaluate("USD")
 
-	assertEqual(fifteenDollars, portfolioInDollars, t)
+	assertEqual(t, portfolioInDollars, fifteenDollars)
 }
 
 func TestAdditionOfDollarsAndEuros(t *testing.T) {
@@ -44,9 +44,9 @@ func TestAdditionOfDollarsAndEuros(t *testing.T) {
 	portfolio = portfolio.Add(tenEuros)
 	actualMoney, _ := portfolio.Evaluate("USD")
 
-	expectMoney := stocks.NewMoney(17, "USD")
+	expectedMoney := stocks.NewMoney(17, "USD")
 
-	assertEqual(actualMoney, expectMoney, t)
+	assertEqual(t, expectedMoney, actualMoney)
 }
 
 func TestAdditionOfDollarsAndWons(t *testing.T) {
@@ -61,7 +61,7 @@ func TestAdditionOfDollarsAndWons(t *testing.T) {
 
 	expectedMoney := stocks.NewMoney(2200, "KRW")
 
-	assertEqual(actualMoney, expectedMoney, t)
+	assertEqual(t, expectedMoney, actualMoney)
 }
 
 func TestAddtionWithMultipleMissingExchangeRates(t *testing.T) {
@@ -79,14 +79,11 @@ func TestAddtionWithMultipleMissingExchangeRates(t *testing.T) {
 		"Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid,]"
 	_, actualError := portfolio.Evaluate("Kalganid")
 
-	if expectedErrorMessage != actualError.Error() {
-		t.Errorf("Expected %s Got %s",
-			expectedErrorMessage, actualError.Error())
-	}
+	assertEqual(t, expectedErrorMessage, actualError.Error())
 }
 
-func assertEqual(actualMoney stocks.Money, expectedMoney stocks.Money, t *testing.T) {
-	if actualMoney != expectedMoney {
-		t.Errorf("Expected %+v, got %+v", expectedMoney, actualMoney)
+func assertEqual(t *testing.T, expected interface{}, actual interface{}) {
+	if actual != expected {
+		t.Errorf("Expected %+v, got %+v", expected, actual)
 	}
 }
