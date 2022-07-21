@@ -15,8 +15,8 @@ This repo is based on the [code repository](https://github.com/saleem/tdd-book-c
 - Chapter 7 :white_check_mark:
 - Chapter 8 :white_check_mark:
 - Chapter 9 :white_check_mark:
-- Chapter 10 :star:
-- Chapter 11
+- Chapter 10 :white_check_mark:
+- Chapter 11 :star:
 - Chapter 12
 - Chapter 13
 - Chapter 14
