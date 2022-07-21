@@ -15,8 +15,19 @@ class Portfolio:
         self.monies.extend(monies)
 
     def evaluate(self, currency: float) -> Money:
-        total = sum(self.convert(money, currency) for money in self.monies)
-        return Money(total, currency)
+        total = 0.0
+        failures = []
+        for money in self.monies:
+            try:
+                total += self.convert(money, currency)
+            except KeyError as error:
+                failures.append(error)
+
+        if not failures:
+            return Money(total, currency)
+
+        failure_message = ",".join(f.args[0] for f in failures)
+        raise Exception(f"Missing exchange rate(s):[{failure_message}]")
 
     def convert(self, money: Money, currency: str) -> float:
         rate = f"{money.currency}->{currency}"
