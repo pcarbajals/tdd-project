@@ -6,6 +6,14 @@ import (
 	"testing"
 )
 
+var bank stocks.Bank
+
+func init() {
+	bank = stocks.NewBank()
+	bank.AddExchangeRate("EUR", "USD", 1.2)
+	bank.AddExchangeRate("USD", "KRW", 1100)
+}
+
 func TestMultiplication(t *testing.T) {
 	actualMoney := stocks.NewMoney(10, "EUR").Times(2)
 	expectedMoney := stocks.NewMoney(20, "EUR")
@@ -22,7 +30,6 @@ func TestDivision(t *testing.T) {
 
 func TestAddition(t *testing.T) {
 	var portfolio stocks.Portfolio
-	var portfolioInDollars stocks.Money
 
 	fiveDollars := stocks.NewMoney(5, "USD")
 	tenDollars := stocks.NewMoney(10, "USD")
@@ -30,9 +37,10 @@ func TestAddition(t *testing.T) {
 
 	portfolio = portfolio.Add(fiveDollars)
 	portfolio = portfolio.Add(tenDollars)
-	portfolioInDollars, _ = portfolio.Evaluate("USD")
+	portfolioInDollars, err := portfolio.Evaluate(bank, "USD")
 
-	assertEqual(t, portfolioInDollars, fifteenDollars)
+	assertNil(t, err)
+	assertEqual(t, fifteenDollars, *portfolioInDollars)
 }
 
 func TestAdditionOfDollarsAndEuros(t *testing.T) {
@@ -43,11 +51,12 @@ func TestAdditionOfDollarsAndEuros(t *testing.T) {
 
 	portfolio = portfolio.Add(fiveDollars)
 	portfolio = portfolio.Add(tenEuros)
-	actualMoney, _ := portfolio.Evaluate("USD")
+	actualMoney, err := portfolio.Evaluate(bank, "USD")
 
 	expectedMoney := stocks.NewMoney(17, "USD")
 
-	assertEqual(t, expectedMoney, actualMoney)
+	assertNil(t, err)
+	assertEqual(t, expectedMoney, *actualMoney)
 }
 
 func TestAdditionOfDollarsAndWons(t *testing.T) {
@@ -58,11 +67,12 @@ func TestAdditionOfDollarsAndWons(t *testing.T) {
 
 	portfolio = portfolio.Add(oneDollar)
 	portfolio = portfolio.Add(elevenHundredWon)
-	actualMoney, _ := portfolio.Evaluate("KRW")
+	actualMoney, err := portfolio.Evaluate(bank, "KRW")
 
 	expectedMoney := stocks.NewMoney(2200, "KRW")
 
-	assertEqual(t, expectedMoney, actualMoney)
+	assertNil(t, err)
+	assertEqual(t, expectedMoney, *actualMoney)
 }
 
 func TestAddtionWithMultipleMissingExchangeRates(t *testing.T) {
@@ -78,8 +88,9 @@ func TestAddtionWithMultipleMissingExchangeRates(t *testing.T) {
 
 	expectedErrorMessage :=
 		"Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid,]"
-	_, actualError := portfolio.Evaluate("Kalganid")
+	value, actualError := portfolio.Evaluate(bank, "Kalganid")
 
+	assertNil(t, value)
 	assertEqual(t, expectedErrorMessage, actualError.Error())
 }
 
