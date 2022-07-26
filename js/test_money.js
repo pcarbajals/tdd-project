@@ -5,6 +5,11 @@ const Portfolio = require('./portfolio');
 
 
 class MoneyTest {
+    constructor() {
+        this.bank = new Bank();
+        this.bank.addExchangeRate("EUR", "USD", 1.2);
+        this.bank.addExchangeRate("USD", "KRW", 1100);
+    }
     testMultiplication() {
         let tenEuros = new Money(10, "EUR");
         let twentyEuros = new Money(20, "EUR");
@@ -21,7 +26,7 @@ class MoneyTest {
         let tenDollars = new Money(10, "USD");
         let portfolio = new Portfolio();
         portfolio.add(fiveDollars, tenDollars)
-        assert.deepStrictEqual(portfolio.evaluate("USD"), new Money(15, "USD"))
+        assert.deepStrictEqual(portfolio.evaluate(this.bank, "USD"), new Money(15, "USD"))
     }
 
     testAdditionOfDollarsAndEuros() {
@@ -29,7 +34,7 @@ class MoneyTest {
         let tenEuros = new Money(10, "EUR");
         let portfolio = new Portfolio();
         portfolio.add(fiveDollars, tenEuros)
-        assert.deepStrictEqual(portfolio.evaluate("USD"), new Money(17, "USD"))
+        assert.deepStrictEqual(portfolio.evaluate(this.bank, "USD"), new Money(17, "USD"))
     }
 
     testAdditionOfDollarsAndWons() {
@@ -37,7 +42,7 @@ class MoneyTest {
         let elevenHundredWons = new Money(1100, "KRW");
         let portfolio = new Portfolio();
         portfolio.add(oneDollar, elevenHundredWons)
-        assert.deepStrictEqual(portfolio.evaluate("KRW"), new Money(2200, "KRW"))
+        assert.deepStrictEqual(portfolio.evaluate(this.bank, "KRW"), new Money(2200, "KRW"))
     }
 
     testAddtionWithMultipleMissingExchangeRates() {
@@ -49,7 +54,7 @@ class MoneyTest {
         portfolio.add(oneDollar, oneEuro, oneWon);
 
         let expectedError = new Error("Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid]");
-        assert.throws(function() {portfolio.evaluate("Kalganid")}, expectedError);
+        assert.throws(() => portfolio.evaluate(this.bank, "Kalganid"), expectedError);
     }
 
     testConversion() {
