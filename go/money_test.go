@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	stocks "tdd/stocks"
 	"testing"
 )
@@ -95,9 +96,7 @@ func TestConversionWithMissingExchangeRate(t *testing.T) {
 	bank := stocks.NewBank()
 	tenEuros := stocks.NewMoney(10, "EUR")
 	actualConvertedMoney, err := bank.Convert(tenEuros, "Kalganid")
-	if actualConvertedMoney != nil {
-		t.Errorf("Expected money to be nil, found: [%+v]", actualConvertedMoney)
-	}
+	assertNil(t, actualConvertedMoney)
 	assertEqual(t, "EUR->Kalganid", err.Error())
 }
 
@@ -107,8 +106,8 @@ func assertEqual(t *testing.T, expected interface{}, actual interface{}) {
 	}
 }
 
-func assertNil(t *testing.T, err error) {
-	if err != nil {
-		t.Errorf("Expected error to be nil, found: [%s]", err)
+func assertNil(t *testing.T, actual interface{}) {
+	if actual != nil && !reflect.ValueOf(actual).IsNil() {
+		t.Errorf("Expected to be nil, found: [%+v]", actual)
 	}
 }
