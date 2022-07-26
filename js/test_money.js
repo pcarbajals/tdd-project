@@ -1,6 +1,7 @@
 const assert = require('assert');
-const Money = require('./money')
-const Portfolio = require('./portfolio')
+const Bank = require('./bank');
+const Money = require('./money');
+const Portfolio = require('./portfolio');
 
 
 class MoneyTest {
@@ -49,6 +50,13 @@ class MoneyTest {
 
         let expectedError = new Error("Missing exchange rate(s):[USD->Kalganid,EUR->Kalganid,KRW->Kalganid]");
         assert.throws(function() {portfolio.evaluate("Kalganid")}, expectedError);
+    }
+
+    testConversion() {
+        let bank = new Bank();
+        bank.addExchangeRate("EUR", "USD", 1.2);
+        let tenEuros = new Money(10, "EUR");
+        assert.deepStrictEqual(bank.convert(tenEuros, "USD"), new Money(12, "USD"))
     }
 
     getAllTestMethods() {
